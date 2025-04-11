@@ -11,7 +11,7 @@ import {
 
 export default function Gallery() {
   const [folder, setFolder] = useState('')
-  const [inputValue, setInputValue] = useState('')
+  const [inputValue, setInputValue] = useState('d:\\image')
   const [images, setImages] = useState([])
   const [error, setError] = useState(null)
 
