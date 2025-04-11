@@ -8,6 +8,8 @@ import {
   Stack,
   Box
 } from '@mui/material'
+import { IconButton } from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete'
 type GalleryProps = {
   folder: string;
 };
@@ -41,10 +43,13 @@ const Gallery: React.FC<GalleryProps> = ({ folder }) => {
         console.error(err);
       });
   }, [folder]); // 每当 folder 改变时重新执行
-  const getName=(url:string)=>{
+  const getName = (url: string) => {
     const parsedUrl = new URL(url)
-const file = parsedUrl.searchParams.get('file')
-return file
+    const file = parsedUrl.searchParams.get('file')
+    return file
+  }
+  const handleDelete = (url: string) => {
+
   }
   // 渲染图片
   const renderImages = () => {
@@ -57,25 +62,37 @@ return file
     }
 
     return (
-        <Box display="flex" flexDirection="column" gap={3} mt={3}>
-                {images.map((url, i) => (
-                    <div>
-                        <h1>{getName(url)}</h1>
- <img
+      <Box display="flex" flexDirection="column" gap={3} mt={3}>
+        {images.map((url, i) => (
+          <Box key={url} position="relative" display="inline-block">
+            <h1>{getName(url)}</h1>
+          <img
+            src={url}
+            alt="img"
+            style={{
+              width: 'auto',
+              height: 'auto',
+              borderRadius: 8,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+            }}
+          />
+          <IconButton
+            size="small"
+            onClick={() => handleDelete(url)}
+            sx={{
+              position: 'absolute',
+              top: 18,
+              left: 8, // ✅ 从 right 改为 left
+              backgroundColor: 'white',
+              ':hover': { backgroundColor: '#eee' },
+            }}
+          >
+            <DeleteIcon fontSize="small" />
+          </IconButton>
+        </Box>
 
-key={i}
-src={url}
-alt={`img-${i}`}
-style={{
-  height: 'auto',
-  borderRadius: 8,
-  boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-}}
-/>
-                    </div>
-                 
-                ))}
-              </Box>
+        ))}
+      </Box>
     );
   };
 

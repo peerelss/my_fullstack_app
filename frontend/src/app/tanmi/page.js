@@ -8,7 +8,7 @@ export default function Home() {
 
   return (
     <div style={{ display: 'flex' }}>
-     <div style={{ width: 300, borderRight: '1px solid #ccc', padding: 8 }}>
+     <div style={{ width: 600, borderRight: '1px solid #ccc', padding: 8 }}>
         <FolderBrowser onSelect={setSelectedFolder} />
       </div>
       <div style={{ flex: 1 }}>
